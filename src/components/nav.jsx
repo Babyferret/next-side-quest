@@ -7,7 +7,7 @@ export default function nav() {
   };
   return (
     <header className="bg-gray-200 drop-shadow-lg">
-      <nav className="flex justify-between h-12">
+      <nav className="flex justify-between py-6">
         <h1 className="m-auto text-lg font-bold">Nextjs-Side-Quest</h1>
         <ul className="flex jextify-between mr-5">
           <li className={style["link_text"]}>

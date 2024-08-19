@@ -3,23 +3,43 @@
 import React from "react";
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
-import { useRouter } from "next/navigation";
 import { HomeOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const App = () => {
   const [form] = Form.useForm();
   const router = useRouter();
 
   const onFinish = async (values) => {
-    console.log("Values: ", values);
-    router.push("/login");
+    const username = values.username;
+    const email = values.email;
+    const password = values.password;
+    const passwordConfirm = values.passwordConfirm;
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, email, password, passwordConfirm }),
+      });
+      if (response.ok) {
+        form.resetFields();
+        router.push("/login");
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("Error while registration: ", error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 shadow-md rounded">
-        <Link href="home">
+        <Link href="/">
           <HomeOutlined />
         </Link>
         <h1 className="text-3xl font-bold text-center mb-8">Register Page</h1>
@@ -53,7 +73,14 @@ const App = () => {
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
+            rules={[
+              {
+                required: true,
+                message: "The length must be between 8 and 72.",
+                min: 8,
+                max: 72,
+              },
+            ]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -62,7 +89,7 @@ const App = () => {
             />
           </Form.Item>
           <Form.Item
-            name="confirmpassword"
+            name="passwordConfirm"
             rules={[
               {
                 required: true,

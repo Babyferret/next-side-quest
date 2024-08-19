@@ -12,13 +12,33 @@ const App = () => {
 
   const onFinish = async (values) => {
     console.log(values);
-    router.push("home");
+
+    const identity = values.email;
+    const password = values.password;
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ identity, password }),
+      });
+      if (response.ok) {
+        form.resetFields();
+        router.push("/pages/home");
+      } else {
+        console.log("User authentication failed.");
+      }
+    } catch (error) {
+      console.log("Error while loging-in: ", error);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 shadow-md rounded">
-        <Link href="home">
+        <Link href="/">
           <HomeOutlined />
         </Link>
         <h1 className="text-3xl font-bold text-center mb-8">Login Page</h1>
@@ -26,7 +46,7 @@ const App = () => {
           form={form}
           name="login"
           className=""
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
         >
           <Form.Item

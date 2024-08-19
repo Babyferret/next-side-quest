@@ -5,6 +5,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const App = () => {
   const [form] = Form.useForm();
@@ -24,6 +25,9 @@ const App = () => {
         },
         body: JSON.stringify({ identity, password }),
       });
+
+      console.log("Response: ", response);
+
       if (response.ok) {
         form.resetFields();
         router.push("/pages/home");

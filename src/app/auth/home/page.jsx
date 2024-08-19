@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 
-export default function page() {
+export default function Page() {
   const [username, setUsername] = useState("");
 
   useEffect(() => {

@@ -6,7 +6,7 @@ export default function page() {
     <div>
       <Nav />
       <div className='flex justify-center my-80'>
-      <h1 className='text-3xl font-bold'>My Website</h1></div>
+      <h1 className='text-3xl font-bold'>Welcome!</h1></div>
       <Footer />
     </div>
   )

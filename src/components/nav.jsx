@@ -37,13 +37,13 @@ export default function Nav() {
   return (
     <header className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
       <nav className="container mx-auto flex justify-between items-center py-4 px-6">
-        <Link href="/pages/home" className="text-2xl font-bold text-gray-800">
+        <Link href="./home" className="text-2xl font-bold text-gray-800">
           Next.js Side Quest
         </Link>
         <ul className="flex space-x-6">
           <li>
             <Link
-              href="/pages/home"
+              href="./home"
               className={`${style.link_text} ${style.shine_effect}`}
             >
               Home
@@ -51,7 +51,7 @@ export default function Nav() {
           </li>
           <li>
             <Link
-              href="/pages/about"
+              href="./about"
               className={`${style.link_text} ${style.shine_effect}`}
             >
               About
@@ -59,7 +59,7 @@ export default function Nav() {
           </li>
           <li>
             <Link
-              href="/pages/contact"
+              href="./contact"
               className={`${style.link_text} ${style.shine_effect}`}
             >
               Contact

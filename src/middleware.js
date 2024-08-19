@@ -11,6 +11,6 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: '/pages/:path*'
+    matcher: '/auth/:path*'
 };
 

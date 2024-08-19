@@ -5,7 +5,9 @@ export async function POST(req) {
         pb.authStore.clear();
 
         const response = new Response(JSON.stringify({ message: 'Logged out successfully' }), { status: 200 });
-        response.headers.set('Set-Cookie', `pb_auth_token=; Path=/; HttpOnly; SameSite=Lax expires=Thu, 01 Jan 1970 00:00:00 GMT`);
+        response.headers.set('Set-Cookie', `pb_auth_token=; Path=/; HttpOnly; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT`);
+        response.headers.append('Set-Cookie', `user_id=; Path=/; HttpOnly; SameSite=Lax; Expires=Thu, 01 Jan 1970 00:00:00 GMT`);
+
 
         return response;
     } catch (error) {

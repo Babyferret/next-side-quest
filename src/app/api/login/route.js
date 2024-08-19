@@ -9,7 +9,8 @@ export async function POST(req) {
         );
 
         const response = new Response(JSON.stringify(authData), { status: 200 });
-        response.headers.set('Set-Cookie', `pb_auth_token=${pb.authStore.token}; Path=/; HttpOnly; SameSite=Lax`);
+        response.headers.set('Set-Cookie', `pb_auth_token=${pb.authStore.token}; Path =/; HttpOnly; SameSite=Lax`);
+        response.headers.append('Set-Cookie', `user_id = ${pb.authStore.model.id}; Path =/; HttpOnly; SameSite=Lax`);
 
         return response
     } catch (error) {

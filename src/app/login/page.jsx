@@ -30,7 +30,7 @@ const App = () => {
 
       if (response.ok) {
         form.resetFields();
-        router.push("/pages/home");
+        router.push("/auth/home");
       } else {
         console.log("User authentication failed.");
       }

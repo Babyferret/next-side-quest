@@ -1,5 +1,7 @@
+"use client";
 import Link from "next/link";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export default function Nav() {
   const style = {
@@ -10,6 +12,26 @@ export default function Nav() {
       before:w-0 before:h-[3px] before:bg-gray-800 before:transition-all before:duration-300 
       before:ease-in-out hover:before:w-full hover:before:translate-x-0 hover:before:origin-left
     `,
+  };
+  const router = useRouter();
+
+  const LogoutButton = async () => {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        router.push("/login");
+      } else {
+        console.log("Logout failed.");
+      }
+    } catch (error) {
+      console.log("Error while logout: ", error);
+    }
   };
 
   return (
@@ -44,7 +66,7 @@ export default function Nav() {
             </Link>
           </li>
           <li className="text-lg font-semibold text-red-500 hover:text-red-400 transition-colors duration-300">
-            <Link href="/">Logout</Link>
+            <button onClick={LogoutButton}>Logout</button>
           </li>
         </ul>
       </nav>
